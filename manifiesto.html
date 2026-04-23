@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>manifiesto — bzr.bz</title>
+  <meta name="description" content="El manifiesto del bazar. Publicar pronto, publicar feo. Los usuarios son el roadmap. Morir bien es parte del ciclo." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page narrow">
+
+    <div class="topbar">
+      <div class="issue">volumen 01 · <strong>abril 2026</strong></div>
+      <nav>
+        <a href="/">el bazar</a>
+        <a href="/manifiesto.html" aria-current="page">manifiesto</a>
+      </nav>
+      <div><span class="dot"></span>abierto</div>
+    </div>
+
+    <section class="hero compact">
+      <h1 class="wordmark">manifiesto</h1>
+      <div class="tagline">reglas de casa del bazar</div>
+    </section>
+
+    <article class="prose">
+
+      <p class="lede">
+        bzr.bz es un bazar de herramientas web pequeñas. Un puesto por idea. Cada herramienta vive en un subdominio y tiene su propia vida: nace como prototipo, se publica antes de estar "terminada", se itera sobre la marcha, y se mantiene mientras la use alguien.
+      </p>
+
+      <p>No es una startup. No es un SaaS. No es un portafolio. Es un sitio donde aparcar ideas y ver cuáles arraigan.</p>
+
+      <h2 data-num="01">La filosofía, en corto</h2>
+
+      <p>El proyecto toma prestado del ensayo de Eric S. Raymond <em>La Catedral y el Bazar</em>. La catedral se diseña arriba y se construye durante años; cuando abre, abre perfecta. El bazar, en cambio, es ruidoso, desordenado, tiene puestos que abren y cierran, y evoluciona solo porque mucha gente está haciendo cosas a la vez sin pedir permiso.</p>
+
+      <p>bzr.bz se rige por cinco principios, a modo de reglas de casa:</p>
+
+      <h3>1. Publicar pronto, publicar feo</h3>
+      <p>Si algo funciona mínimamente, ya puede salir. Un prototipo en producción enseña más en una semana que un plan en un mes.</p>
+
+      <h3>2. Los usuarios son el roadmap</h3>
+      <p>Se mira qué se usa, no qué "debería" usarse. Las métricas son brújula, no trofeo.</p>
+
+      <h3>3. Una herramienta = un propósito</h3>
+      <p>Nada de mega-apps. Si una idea crece demasiado, se parte en dos puestos.</p>
+
+      <h3>4. Morir bien es parte del ciclo</h3>
+      <p>Si un puesto lleva meses sin visitas, se archiva sin drama. Queda una página estática de recuerdo y el código en GitHub. Siguiente.</p>
+
+      <h3>5. Regla del fin de semana</h3>
+      <p>Ningún prototipo inicial debería costar más de un fin de semana largo. Si cuesta más, es que la idea no está lo bastante reducida.</p>
+
+      <h2 data-num="02">El ciclo de vida de un puesto</h2>
+
+      <p>Cada herramienta pasa por fases. No hay plazos fijos, sí hay señales.</p>
+
+      <ul>
+        <li><strong>Idea</strong> — se escribe en una nota de dos párrafos. Qué hace, por qué importaría a alguien (aunque sea a una sola persona), cuál es la versión mínima publicable.</li>
+        <li><strong>Prototipo</strong> — se construye la versión más tonta posible que haga la cosa principal. Sin login, sin settings, sin dark mode. Solo la función nuclear.</li>
+        <li><strong>Publicación</strong> — sale al subdominio. Se anuncia donde tenga sentido (Mastodon, HN, un grupo de amigos). Se mide tráfico, retención, feedback.</li>
+        <li><strong>Iteración</strong> — durante las primeras semanas se mira qué pide la gente real y se añade lo más barato con mayor impacto. Aquí se decide si hay fuego.</li>
+        <li><strong>Graduación o deprecación</strong> — <em>graduación</em>: tiene uso sostenido → se invierte en pulir, estabilizar, documentar. <em>Deprecación</em>: nadie vuelve → banner, congelación, archivo tras un mes.</li>
+      </ul>
+
+      <h2 data-num="03">Cómo se publica una idea nueva</h2>
+
+      <p>El flujo recomendado es el mismo para cada puesto, y está pensado para eliminar fricción: cada puesto vive en su propio repo (<code>bzr-&lt;nombre&gt;</code>), se despliega en su propio subdominio (<code>&lt;nombre&gt;.bzr.bz</code>), y aparece automáticamente en el índice de la landing una vez se marca como "abierto".</p>
+
+      <p>La landing lee un <code>tools.json</code> centralizado donde cada puesto declara su nombre, tagline, URL, estado (prototipo / activo / archivado), fecha de apertura, y una línea de descripción. Archivar un puesto es cambiar su estado en ese JSON. Todo lo demás se sigue sirviendo como estático.</p>
+
+      <h2 data-num="04">Stack por defecto (pero flexible)</h2>
+
+      <p>No hay un stack obligatorio, pero sí uno por defecto para no perder tiempo decidiendo:</p>
+
+      <ul>
+        <li><strong>Frontend</strong>: lo que mejor encaje con la herramienta. SolidJS/Svelte para apps, HTML+CSS puros para lo simple, React si ya tiene librerías que te ahorran trabajo.</li>
+        <li><strong>Backend</strong> (cuando haga falta): SQLite + un framework delgado. Elixir/Phoenix, Deno Fresh, Go+HTMX, o FastAPI.</li>
+        <li><strong>Hosting</strong>: estático en Cloudflare Pages/Netlify para prototipos sin backend; Fly.io o un VPS pequeño para los que tengan servidor.</li>
+        <li><strong>Dominio y DNS</strong>: todo bajo <code>bzr.bz</code> con wildcard DNS hacia el hosting.</li>
+        <li><strong>Analítica</strong>: algo ligero y respetuoso (Plausible, Umami self-hosted, o simplemente logs del servidor). Sin Google Analytics.</li>
+      </ul>
+
+      <p>La regla es: <strong>elegir la herramienta que permita publicar antes, no la que quede mejor en el CV.</strong></p>
+
+      <h2 data-num="05">Cómo se mide el éxito</h2>
+
+      <p>Tres señales, en orden de importancia:</p>
+
+      <ol>
+        <li><strong>Uso real sostenido</strong>. Gente que vuelve la semana siguiente, no visitas puntuales de HN.</li>
+        <li><strong>Mensajes no pedidos</strong>. Alguien que escribe sin que le pidas feedback. Oro puro.</li>
+        <li><strong>Forks o imitaciones</strong>. Si alguien se inspira para hacer su versión, la idea tenía algo.</li>
+      </ol>
+
+      <p>No se miden: likes, shares, "productos lanzados", horas dedicadas.</p>
+
+      <h2 data-num="06">Qué NO es bzr.bz</h2>
+
+      <p>Para evitar malentendidos con uno mismo dentro de seis meses:</p>
+
+      <ul>
+        <li>No es un negocio. Las herramientas pueden monetizarse si tiene sentido, pero eso no es el motor.</li>
+        <li>No es una plataforma. Cada puesto es independiente. Comparten dominio y estética, no base de datos.</li>
+        <li>No es un monorepo. Cada puesto es su propio repo con su propio ritmo.</li>
+        <li>No es un porfolio para impresionar reclutadores. Algunos puestos van a ser feos o tontos, y está bien.</li>
+      </ul>
+
+      <hr />
+
+      <p style="font-family: var(--mono); font-size: var(--fs-meta); text-align: center; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);">
+        Última revisión: abril 2026 · Este documento se revisa cada vez que abre o cierra un puesto.
+      </p>
+
+    </article>
+
+    <footer class="site">
+      <div>
+        <div class="sig">bzr.bz</div>
+        <div>con ayuda de los robots 🤖 · sin trackers · sin promesas</div>
+      </div>
+      <div style="text-align: right;">
+        <div>escribe: <a href="mailto:hola@bzr.bz">hola@bzr.bz</a></div>
+        <div><a href="https://github.com/bzrbz">github</a> · mastodon · rss</div>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

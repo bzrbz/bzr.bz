@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bzr.bz — el bazar</title>
+  <meta name="description" content="Un bazar de herramientas web pequeñas. Publicar pronto, publicar feo, iterar sobre lo que la gente usa." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+
+    <div class="topbar">
+      <div class="issue">volumen 01 · <strong>abril 2026</strong></div>
+      <nav>
+        <a href="/" aria-current="page">el bazar</a>
+        <a href="/manifiesto.html">manifiesto</a>
+      </nav>
+      <div><span class="dot"></span>abierto</div>
+    </div>
+
+    <section class="hero">
+      <h1 class="wordmark">bzr<span class="dot-sep">.</span>bz</h1>
+      <div class="tagline">un bazar de herramientas web</div>
+      <div class="pronounce">se lee "bazar baz"</div>
+
+      <div class="stamp" aria-hidden="true">
+        <strong>Open</strong>
+        since 2026
+        <small>no. 001</small>
+      </div>
+    </section>
+
+    <section class="manifesto" id="manifiesto">
+      <blockquote class="quote">
+        La catedral se planea durante años y abre perfecta. El bazar es ruidoso, desordenado, tiene puestos que abren y cierran, y evoluciona solo porque mucha gente hace cosas a la vez sin pedir permiso.
+        <cite>Parafraseando a Eric S. Raymond</cite>
+      </blockquote>
+
+      <div class="cols">
+        <div class="principle">
+          <span class="num">01</span>
+          <h3>Publicar pronto, publicar feo</h3>
+          <p>Si funciona mínimamente, ya puede salir. Un prototipo en producción enseña más en una semana que un plan en un mes.</p>
+        </div>
+        <div class="principle">
+          <span class="num">02</span>
+          <h3>Los usuarios son el roadmap</h3>
+          <p>Se mira qué se usa, no qué "debería" usarse. Si nadie vuelve la segunda semana, la idea no era tan buena.</p>
+        </div>
+        <div class="principle">
+          <span class="num">03</span>
+          <h3>Una herramienta, un propósito</h3>
+          <p>Nada de mega-apps. Si algo crece demasiado, se parte en dos puestos. Cada puesto vive y muere por su cuenta.</p>
+        </div>
+        <div class="principle">
+          <span class="num">04</span>
+          <h3>Morir bien es parte del ciclo</h3>
+          <p>Si un puesto no tiene visitas en meses, se archiva sin drama. Queda el código, queda el aprendizaje. Siguiente.</p>
+        </div>
+        <div class="read-more">
+          <a href="/manifiesto.html">lee el manifiesto completo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="market">
+      <header class="section-head">
+        <h2>los <em>puestos</em></h2>
+        <div class="count"><strong>02</strong> en preparación · <strong>00</strong> abiertos · <strong>00</strong> archivados</div>
+      </header>
+
+      <div class="stalls">
+
+        <a class="stall taped" href="https://jrnl.bzr.bz" aria-disabled="true">
+          <span class="status status--soon">· próximamente</span>
+          <h3 class="name">jrnl</h3>
+          <p class="tagline-txt">bullet journal, local-first</p>
+          <p>Un bullet journal que vive en tu navegador. Sin cuenta, sin servidor, sin onboarding. Abres la URL y escribes. Los datos son tuyos y se quedan en tu máquina.</p>
+          <footer>
+            <span>jrnl.bzr.bz</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </footer>
+        </a>
+
+        <a class="stall" href="https://echo.bzr.bz" aria-disabled="true">
+          <span class="status status--soon">· próximamente</span>
+          <h3 class="name">echochamber</h3>
+          <p class="tagline-txt">red social por invitación</p>
+          <p>Un Reddit de bolsillo, cerrado, para comentar enlaces con amigos. Sin feed público, sin algoritmo, sin votos. Solo tú, tus amigos, y los links que os importan.</p>
+          <footer>
+            <span>echo.bzr.bz</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </footer>
+        </a>
+
+        <div class="stall empty" aria-hidden="true">
+          <div class="plus">+</div>
+          <p>el próximo puesto podría ser tuyo — o nuestro, o de nadie.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="site">
+      <div>
+        <div class="sig">bzr.bz</div>
+        <div>con ayuda de los robots 🤖 · sin trackers · sin promesas</div>
+      </div>
+      <div style="text-align: right;">
+        <div>escribe: <a href="mailto:hola@bzr.bz">hola@bzr.bz</a></div>
+        <div><a href="https://github.com/bzrbz">github</a> · mastodon · rss</div>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

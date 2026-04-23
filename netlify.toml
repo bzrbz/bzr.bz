@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Pretty URL: /manifiesto sirve manifiesto.html sin redirigir
+[[redirects]]
+  from   = "/manifiesto"
+  to     = "/manifiesto.html"
+  status = 200

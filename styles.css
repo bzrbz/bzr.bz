@@ -353,7 +353,8 @@ a:hover { color: var(--stamp); }
   white-space: nowrap;
 }
 .section-head .count span + span::before {
-  content: " · ";
+  content: "·";
+  margin: 0 0.5em;
 }
 .section-head .count strong {
   color: var(--ink);

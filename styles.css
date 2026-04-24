@@ -346,7 +346,14 @@ a:hover { color: var(--stamp); }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  gap: 0;
   white-space: nowrap;
+}
+.section-head .count span + span::before {
+  content: " · ";
 }
 .section-head .count strong {
   color: var(--ink);
@@ -356,7 +363,8 @@ a:hover { color: var(--stamp); }
 
 @media (max-width: 640px) {
   .section-head { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-  .section-head .count { white-space: normal; }
+  .section-head .count { flex-direction: column; gap: 0.2em; }
+  .section-head .count span + span::before { content: none; }
 }
 
 .stalls {

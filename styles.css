@@ -214,6 +214,7 @@ a:hover { color: var(--stamp); }
 
 @media (max-width: 640px) {
   .stamp { top: auto; bottom: -2rem; right: 1rem; transform: rotate(-5deg) scale(0.85); }
+  .section-head .count { white-space: normal; }
 }
 
 /* ============ MANIFESTO ============ */

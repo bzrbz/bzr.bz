@@ -3,71 +3,118 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>bzr.bz — el bazar</title>
-  <meta name="description" content="Un bazar de herramientas web pequeñas. Publicar pronto, publicar feo, iterar sobre lo que la gente usa." />
-
+  <title>el bazar — herramientas web diminutas</title>
+  <meta name="description" content="el bazar: herramientas web pequeñas que abres y usas. Gratis, sin anuncios, sin instalar — una cosa cada una. Publicar pronto, publicar feo." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = localStorage.getItem('bzr-theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      root.setAttribute('data-theme', theme);
+      function syncLabel() {
+        var btn = document.querySelector('.theme-toggle');
+        if (!btn) return;
+        btn.textContent = root.getAttribute('data-theme') === 'dark' ? '◐ día' : '◐ noche';
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        var btn = document.querySelector('.theme-toggle');
+        if (!btn) return;
+        syncLabel();
+        btn.addEventListener('click', function () {
+          var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('bzr-theme', next);
+          syncLabel();
+        });
+      });
+    })();
+  </script>
+  <style>
+    /* ===== hero llano (de la dir. 01) ===== */
+    .c-hero { margin: 3.5rem 0 0; }
+    .c-addr { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.9rem; }
+    .c-addr span { color: var(--stamp); }
+    .c-say {
+      font-family: var(--serif); font-style: italic;
+      font-variation-settings: "SOFT" 60, "WONK" 0, "opsz" 144;
+      font-size: clamp(2rem, 4.6vw, 3.8rem); line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--ink); margin: 1.6rem 0 0; max-width: 20ch;
+    }
+    .c-say b { font-style: normal; color: var(--stamp); font-variation-settings: "SOFT" 0, "WONK" 0; }
+    .c-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.6rem; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .c-chips span { border: 1px solid var(--line); padding: 0.35rem 0.7rem; color: var(--ink); background: var(--paper); }
+    .c-chips span b { color: var(--stamp); font-weight: 400; margin-right: 0.4em; }
+
+    /* ===== cómo funciona (de la dir. 01) ===== */
+    .c-how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 3.5rem 0 0; border-top: 3px solid var(--line); }
+    .c-how::before { content: "cómo funciona"; grid-column: 1 / -1; font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); padding: 0.9rem 0 0; }
+    .c-step { padding: 1.4rem 1.5rem 1.4rem 0; }
+    .c-step + .c-step { border-left: 1px solid var(--line); padding-left: 1.5rem; }
+    .c-step .n { font-family: var(--serif); font-style: italic; font-variation-settings: "WONK" 1, "opsz" 144; font-size: 2.6rem; line-height: 1; color: var(--stamp); display: block; margin-bottom: 0.5rem; }
+    .c-step h4 { font-family: var(--mono); font-size: 0.94rem; margin: 0 0 0.4rem; color: var(--ink); }
+    .c-step p { margin: 0; font-size: 0.86rem; color: var(--ink-soft); line-height: 1.5; }
+
+    /* ===== preguntas razonables (de la dir. 03) ===== */
+    .c-faq-head { margin: 3.4rem 0 0; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 1.6rem; }
+    .c-faq-head h2 {
+      font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 90, "WONK" 1, "opsz" 144;
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 400; margin: 0; letter-spacing: -0.02em; color: var(--ink);
+    }
+    .c-faq-head h2 .mark { color: var(--stamp); font-style: normal; font-variation-settings: "WONK" 0; }
+    .c-faq-head .lbl { font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+
+    .c-faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin: 1.6rem 0 0; border-top: 1px solid var(--line); }
+    .c-faq > div:nth-child(odd) .c-item { border-right: 1px solid var(--line); padding-right: 2rem; }
+    .c-faq > div:nth-child(even) .c-item { padding-left: 2rem; }
+    .c-item { padding: 1.3rem 1.6rem 1.3rem 0; border-bottom: 1px solid var(--line); }
+    .c-item dt { font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 50, "opsz" 36; font-size: 1.15rem; color: var(--stamp); margin-bottom: 0.4rem; }
+    .c-item dd { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink-soft); }
+    .c-item dd a { color: var(--ink); text-decoration-color: var(--stamp); }
+
+    /* footer un poco más cerca, sin banda vacía de doble raya */
+    footer.site { margin-top: 2.6rem; }
+
+    @media (max-width: 760px) {
+      .c-how { grid-template-columns: 1fr; }
+      .c-step + .c-step { border-left: none; padding-left: 0; border-top: 1px solid var(--line); }
+      .c-faq { grid-template-columns: 1fr; }
+      .c-faq > div:nth-child(odd) .c-item { border-right: none; padding-right: 0; }
+      .c-faq > div:nth-child(even) .c-item { padding-left: 0; }
+    }
+  </style>
 </head>
 <body>
   <div class="page">
 
     <div class="topbar">
-      <div class="issue">volumen 01 · <strong>abril 2026</strong></div>
+      <div class="issue">volumen <strong>01</strong></div>
       <nav>
         <a href="/" aria-current="page">el bazar</a>
         <a href="/manifiesto.html">manifiesto</a>
       </nav>
-      <div><span class="dot"></span>abierto</div>
+      <div class="topbar-end">
+        <button type="button" class="theme-toggle" aria-label="Cambiar entre modo día y noche">◐ noche</button>
+        <span class="status-open"><span class="dot"></span>abierto</span>
+      </div>
     </div>
 
-    <section class="hero">
-      <h1 class="wordmark">bzr<span class="dot-sep">.</span>bz</h1>
-      <div class="tagline">un bazar de herramientas web</div>
-      <div class="pronounce">se lee "bazar baz"</div>
-
-      <div class="stamp" aria-hidden="true">
-        <strong>Open</strong>
-        since 2026
-        <small>no. 001</small>
+    <!-- HERO llano (01) -->
+    <section class="hero c-hero">
+      <h1 class="wordmark">el bazar</h1>
+      <p class="c-say">Herramientas web diminutas que <b>abres y ya está.</b></p>
+      <div class="c-chips">
+        <span><b>$0</b> gratis</span>
+        <span><b>·</b> sin anuncios</span>
+        <span><b>·</b> sin instalar</span>
+        <span><b>·</b> una cosa cada una</span>
       </div>
     </section>
 
-    <section class="manifesto" id="manifiesto">
-      <blockquote class="quote">
-        La catedral se planea durante años y abre perfecta. El bazar es ruidoso, desordenado, tiene puestos que abren y cierran, y evoluciona solo porque mucha gente hace cosas a la vez sin pedir permiso.
-        <cite>Parafraseando a Eric S. Raymond</cite>
-      </blockquote>
-
-      <div class="cols">
-        <div class="principle">
-          <span class="num">01</span>
-          <h3>Publicar pronto, publicar feo</h3>
-          <p>Si funciona mínimamente, ya puede salir. Un prototipo en producción enseña más en una semana que un plan en un mes.</p>
-        </div>
-        <div class="principle">
-          <span class="num">02</span>
-          <h3>Los usuarios son el roadmap</h3>
-          <p>Se mira qué se usa, no qué "debería" usarse. Si nadie vuelve la segunda semana, la idea no era tan buena.</p>
-        </div>
-        <div class="principle">
-          <span class="num">03</span>
-          <h3>Una herramienta, un propósito</h3>
-          <p>Nada de mega-apps. Si algo crece demasiado, se parte en dos puestos. Cada puesto vive y muere por su cuenta.</p>
-        </div>
-        <div class="principle">
-          <span class="num">04</span>
-          <h3>Morir bien es parte del ciclo</h3>
-          <p>Si un puesto no tiene visitas en meses, se archiva sin drama. Queda el código, queda el aprendizaje. Siguiente.</p>
-        </div>
-        <div class="read-more">
-          <a href="/manifiesto.html">lee el manifiesto completo</a>
-        </div>
-      </div>
-    </section>
-
+    <!-- LOS PUESTOS -->
     <section class="market">
       <header class="section-head">
         <h2>los <em>puestos</em></h2>
@@ -75,7 +122,6 @@
       </header>
 
       <div class="stalls">
-
         <a class="stall taped" href="https://jrnl.bzr.bz" aria-disabled="true">
           <span class="status status--soon">· próximamente</span>
           <h3 class="name">jrnl</h3>
@@ -102,13 +148,43 @@
           <div class="plus">+</div>
           <p>el próximo puesto podría ser tuyo — o nuestro, o de nadie.</p>
         </div>
-
       </div>
     </section>
 
+    <!-- PREGUNTAS RAZONABLES (03) -->
+    <div class="c-faq-head">
+      <h2>¿y esto qué es, en concreto<span class="mark">?</span></h2>
+    </div>
+    <div class="c-faq">
+      <div>
+        <div class="c-item" style="border-width: 0px">
+          <dt>¿Es gratis?</dt>
+          <dd>Sí. Sin anuncios y sin trampas. No vendemos tus datos porque casi nunca los tocamos.</dd>
+        </div>
+      </div>
+      <div>
+        <div class="c-item" style="border-width: 0px">
+          <dt>¿Necesito una cuenta?</dt>
+          <dd>Para casi todas, no: las abres y ya. Alguna, como <em>echochamber</em> (que es privada, por invitación), pedirá lo mínimo para saber quién eres.</dd>
+        </div>
+      </div>
+      <div>
+        <div class="c-item" style="border-width: 0px">
+          <dt>¿Puedo usar una ahora?</dt>
+          <dd>Casi: los primeros puestos (<em>jrnl</em>, <em>echochamber</em>) están a punto de abrir. Los tienes justo arriba.</dd>
+        </div>
+      </div>
+      <div>
+        <div class="c-item" style="border-width: 0px">
+          <dt>¿Quién lo hace?</dt>
+          <dd>Una persona, con ayuda de robots, publicando ideas para ver cuáles arraigan. <a href="/manifiesto.html">El manifiesto →</a></dd>
+        </div>
+      </div>
+    </div>
+
     <footer class="site">
       <div>
-        <div class="sig">bzr.bz</div>
+        <div class="sig">el bazar</div>
         <div class="foot-meta"><span>con ayuda de los robots 🤖</span><span>sin promesas</span><span>sin vergüenza</span></div>
       </div>
       <div class="contact">

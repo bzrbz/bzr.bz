@@ -693,3 +693,88 @@ footer.site .foot-links span + span::before {
   60% { transform: rotate(8deg) scale(0.95); opacity: 1; }
   100% { transform: rotate(8deg) scale(1); opacity: 0.85; }
 }
+
+/* ===========================================================
+   DARK MODE — el bazar de noche (papel apagado + tinta clara)
+   El tema efectivo se fija en <html data-theme="…"> por JS
+   (lee localStorage y, si no hay, la preferencia del sistema).
+   =========================================================== */
+
+:root[data-theme="dark"] {
+  --paper: #1f1c17;
+  --paper-dark: #2a261e;
+  --ink: #ece4d0;
+  --ink-soft: #a79c84;
+  --stamp: #d8635a;
+  --stamp-faded: #c2554b;
+  --tape: #b59b3e;
+  --mustard: #d6a93c;
+  --line: #423c30;
+}
+
+/* Grano e iluminación invertidos para fondo oscuro */
+:root[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(236,228,208,0.035) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(216,99,90,0.06) 0, transparent 40%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.82  0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* La sombra impresa de los puestos necesita ser oscura sobre fondo oscuro */
+:root[data-theme="dark"] .stall {
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.45), 6px 6px 18px rgba(0,0,0,0.35);
+}
+:root[data-theme="dark"] .stall:hover {
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.5), 10px 10px 24px rgba(0,0,0,0.4);
+}
+:root[data-theme="dark"] .stall[aria-disabled="true"]:hover {
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.45);
+}
+
+/* El sello pinta con 'screen' en oscuro para que el rojo respire */
+:root[data-theme="dark"] .stamp { mix-blend-mode: screen; }
+
+/* Línea central y fondos sutiles de la prosa, recalibrados */
+:root[data-theme="dark"] .page::before {
+  background: linear-gradient(to bottom, transparent 0%, rgba(236,228,208,0.05) 15%, rgba(236,228,208,0.05) 85%, transparent 100%);
+}
+:root[data-theme="dark"] .prose code,
+:root[data-theme="dark"] .prose kbd { background: rgba(236,228,208,0.10); }
+:root[data-theme="dark"] .prose blockquote { background: rgba(236,228,208,0.04); }
+
+/* Transición suave de color al cambiar de tema */
+body { transition: background-color 0.35s ease, color 0.35s ease; }
+
+/* ===========================================================
+   THEME TOGGLE — control mono en el topbar
+   =========================================================== */
+
+.topbar-end {
+  display: flex;
+  align-items: baseline;
+  gap: 1.3rem;
+}
+.topbar-end .status-open {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.theme-toggle {
+  font-family: var(--mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: none;
+  border: 0;
+  padding: 0 0 2px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--stamp);
+  border-bottom-color: var(--stamp);
+  outline: none;
+}

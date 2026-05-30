@@ -10,55 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var saved = localStorage.getItem('bzr-theme');
-      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      root.setAttribute('data-theme', theme);
-      function syncLabel() {
-        var btn = document.querySelector('.theme-toggle');
-        if (!btn) return;
-        btn.textContent = root.getAttribute('data-theme') === 'dark' ? '◐ día' : '◐ noche';
-      }
-      document.addEventListener('DOMContentLoaded', function () {
-        var btn = document.querySelector('.theme-toggle');
-        if (!btn) return;
-        syncLabel();
-        btn.addEventListener('click', function () {
-          var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-          root.setAttribute('data-theme', next);
-          localStorage.setItem('bzr-theme', next);
-          syncLabel();
-        });
-      });
-    })();
-  </script>
-  <style>
-    /* pequeños refuerzos conceptuales sobre .prose */
-    .prose .opener {
-      font-family: var(--serif); font-style: italic;
-      font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 144;
-      font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2; letter-spacing: -0.01em;
-      color: var(--ink); border: none; padding: 0; margin: 0 0 2.5rem;
-    }
-    .prose .opener b { color: var(--stamp); font-style: normal; font-variation-settings: "WONK" 0; }
-    .prose .pull {
-      font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 70, "WONK" 1, "opsz" 144;
-      font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.25; color: var(--stamp);
-      text-align: center; max-width: 28ch; margin: 3rem auto; letter-spacing: -0.01em;
-    }
-    .prose .closer {
-      text-align: center; font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 60, "opsz" 36;
-      font-size: 1.25rem; color: var(--ink-soft); margin: 2rem 0 0;
-    }
-    .prose .tech-note {
-      font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.04em;
-      color: var(--ink-soft); text-align: center; border-top: 1px solid var(--line);
-      margin-top: 3rem; padding-top: 1.4rem;
-    }
-    .prose .tech-note a { color: var(--stamp); }
-  </style>
 </head>
 <body>
   <div class="page narrow">
@@ -70,7 +21,6 @@
         <a href="/manifiesto.html" aria-current="page">manifiesto</a>
       </nav>
       <div class="topbar-end">
-        <button type="button" class="theme-toggle" aria-label="Cambiar entre modo día y noche">◐ noche</button>
         <span class="status-open"><span class="dot"></span>abierto</span>
       </div>
     </div>

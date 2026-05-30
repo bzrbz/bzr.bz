@@ -696,54 +696,47 @@ footer.site .foot-links span + span::before {
 
 /* ===========================================================
    DARK MODE — el bazar de noche (papel apagado + tinta clara)
-   El tema efectivo se fija en <html data-theme="…"> por JS
-   (lee localStorage y, si no hay, la preferencia del sistema).
    =========================================================== */
 
-:root[data-theme="dark"] {
-  --paper: #1f1c17;
-  --paper-dark: #2a261e;
-  --ink: #ece4d0;
-  --ink-soft: #a79c84;
-  --stamp: #d8635a;
-  --stamp-faded: #c2554b;
-  --tape: #b59b3e;
-  --mustard: #d6a93c;
-  --line: #423c30;
-}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1f1c17;
+    --paper-dark: #2a261e;
+    --ink: #ece4d0;
+    --ink-soft: #a79c84;
+    --stamp: #d8635a;
+    --stamp-faded: #c2554b;
+    --tape: #b59b3e;
+    --mustard: #d6a93c;
+    --line: #423c30;
+  }
 
-/* Grano e iluminación invertidos para fondo oscuro */
-:root[data-theme="dark"] body {
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(236,228,208,0.035) 0, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(216,99,90,0.06) 0, transparent 40%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.82  0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-}
+  body {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(236,228,208,0.035) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(216,99,90,0.06) 0, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.82  0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
 
-/* La sombra impresa de los puestos necesita ser oscura sobre fondo oscuro */
-:root[data-theme="dark"] .stall {
-  box-shadow: 3px 3px 0 rgba(0,0,0,0.45), 6px 6px 18px rgba(0,0,0,0.35);
-}
-:root[data-theme="dark"] .stall:hover {
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.5), 10px 10px 24px rgba(0,0,0,0.4);
-}
-:root[data-theme="dark"] .stall[aria-disabled="true"]:hover {
-  box-shadow: 3px 3px 0 rgba(0,0,0,0.45);
-}
+  .stall {
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.45), 6px 6px 18px rgba(0,0,0,0.35);
+  }
+  .stall:hover {
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.5), 10px 10px 24px rgba(0,0,0,0.4);
+  }
+  .stall[aria-disabled="true"]:hover {
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.45);
+  }
 
-/* El sello pinta con 'screen' en oscuro para que el rojo respire */
-:root[data-theme="dark"] .stamp { mix-blend-mode: screen; }
+  .stamp { mix-blend-mode: screen; }
 
-/* Línea central y fondos sutiles de la prosa, recalibrados */
-:root[data-theme="dark"] .page::before {
-  background: linear-gradient(to bottom, transparent 0%, rgba(236,228,208,0.05) 15%, rgba(236,228,208,0.05) 85%, transparent 100%);
+  .page::before {
+    background: linear-gradient(to bottom, transparent 0%, rgba(236,228,208,0.05) 15%, rgba(236,228,208,0.05) 85%, transparent 100%);
+  }
+  .prose code,
+  .prose kbd { background: rgba(236,228,208,0.10); }
+  .prose blockquote { background: rgba(236,228,208,0.04); }
 }
-:root[data-theme="dark"] .prose code,
-:root[data-theme="dark"] .prose kbd { background: rgba(236,228,208,0.10); }
-:root[data-theme="dark"] .prose blockquote { background: rgba(236,228,208,0.04); }
-
-/* Transición suave de color al cambiar de tema */
-body { transition: background-color 0.35s ease, color 0.35s ease; }
 
 /* ===========================================================
    THEME TOGGLE — control mono en el topbar
@@ -759,22 +752,77 @@ body { transition: background-color 0.35s ease, color 0.35s ease; }
   align-items: baseline;
 }
 
-.theme-toggle {
-  font-family: var(--mono);
-  font-size: var(--fs-meta);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  background: none;
-  border: 0;
-  padding: 0 0 2px;
-  cursor: pointer;
-  border-bottom: 1px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+/* ============ INDEX — hero, chips, cómo funciona, faq ============ */
+
+.c-hero { margin: 3.5rem 0 0; }
+.c-addr { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.9rem; }
+.c-addr span { color: var(--stamp); }
+.c-say {
+  font-family: var(--serif); font-style: italic;
+  font-variation-settings: "SOFT" 60, "WONK" 0, "opsz" 144;
+  font-size: clamp(2rem, 4.6vw, 3.8rem); line-height: 1.08; letter-spacing: -0.02em;
+  color: var(--ink); margin: 1.6rem 0 0; max-width: 20ch;
 }
-.theme-toggle:hover,
-.theme-toggle:focus-visible {
-  color: var(--stamp);
-  border-bottom-color: var(--stamp);
-  outline: none;
+.c-say b { font-style: normal; color: var(--stamp); font-variation-settings: "SOFT" 0, "WONK" 0; }
+.c-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.6rem; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.c-chips span { border: 1px solid var(--line); padding: 0.35rem 0.7rem; color: var(--ink); background: var(--paper); }
+.c-chips span b { color: var(--stamp); font-weight: 400; margin-right: 0.4em; }
+
+.c-how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 3.5rem 0 0; border-top: 3px solid var(--line); }
+.c-how::before { content: "cómo funciona"; grid-column: 1 / -1; font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); padding: 0.9rem 0 0; }
+.c-step { padding: 1.4rem 1.5rem 1.4rem 0; }
+.c-step + .c-step { border-left: 1px solid var(--line); padding-left: 1.5rem; }
+.c-step .n { font-family: var(--serif); font-style: italic; font-variation-settings: "WONK" 1, "opsz" 144; font-size: 2.6rem; line-height: 1; color: var(--stamp); display: block; margin-bottom: 0.5rem; }
+.c-step h4 { font-family: var(--mono); font-size: 0.94rem; margin: 0 0 0.4rem; color: var(--ink); }
+.c-step p { margin: 0; font-size: 0.86rem; color: var(--ink-soft); line-height: 1.5; }
+
+.c-faq-head { margin: 3.4rem 0 0; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 1.6rem; }
+.c-faq-head h2 {
+  font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 90, "WONK" 1, "opsz" 144;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 400; margin: 0; letter-spacing: -0.02em; color: var(--ink);
 }
+.c-faq-head h2 .mark { color: var(--stamp); font-style: normal; font-variation-settings: "WONK" 0; }
+.c-faq-head .lbl { font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+
+.c-faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin: 1.6rem 0 0; border-top: 1px solid var(--line); }
+.c-faq > div:nth-child(odd) .c-item { border-right: 1px solid var(--line); padding-right: 2rem; }
+.c-faq > div:nth-child(even) .c-item { padding-left: 2rem; }
+.c-item { padding: 1.3rem 1.6rem 1.3rem 0; border-bottom: 1px solid var(--line); }
+.c-item dt { font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 50, "opsz" 36; font-size: 1.15rem; color: var(--stamp); margin-bottom: 0.4rem; }
+.c-item dd { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink-soft); }
+.c-item dd a { color: var(--ink); text-decoration-color: var(--stamp); }
+
+footer.site { margin-top: 2.6rem; }
+
+@media (max-width: 760px) {
+  .c-how { grid-template-columns: 1fr; }
+  .c-step + .c-step { border-left: none; padding-left: 0; border-top: 1px solid var(--line); }
+  .c-faq { grid-template-columns: 1fr; }
+  .c-faq > div:nth-child(odd) .c-item { border-right: none; padding-right: 0; }
+  .c-faq > div:nth-child(even) .c-item { padding-left: 0; }
+}
+
+/* ============ MANIFIESTO — clases específicas de la página ============ */
+
+.prose .opener {
+  font-family: var(--serif); font-style: italic;
+  font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 144;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2; letter-spacing: -0.01em;
+  color: var(--ink); border: none; padding: 0; margin: 0 0 2.5rem;
+}
+.prose .opener b { color: var(--stamp); font-style: normal; font-variation-settings: "WONK" 0; }
+.prose .pull {
+  font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 70, "WONK" 1, "opsz" 144;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.25; color: var(--stamp);
+  text-align: center; max-width: 28ch; margin: 3rem auto; letter-spacing: -0.01em;
+}
+.prose .closer {
+  text-align: center; font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 60, "opsz" 36;
+  font-size: 1.25rem; color: var(--ink-soft); margin: 2rem 0 0;
+}
+.prose .tech-note {
+  font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.04em;
+  color: var(--ink-soft); text-align: center; border-top: 1px solid var(--line);
+  margin-top: 3rem; padding-top: 1.4rem;
+}
+.prose .tech-note a { color: var(--stamp); }

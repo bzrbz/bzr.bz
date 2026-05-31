@@ -414,6 +414,8 @@ a:hover { color: var(--stamp); }
   border-right: 1px dashed rgba(0,0,0,0.12);
 }
 
+.stall-text { display: contents; }
+
 .stall .status {
   display: inline-block;
   font-family: var(--mono);
@@ -800,6 +802,60 @@ footer.site { margin-top: 2.6rem; }
   .c-faq { grid-template-columns: 1fr; }
   .c-faq > div:nth-child(odd) .c-item { border-right: none; padding-right: 0; }
   .c-faq > div:nth-child(even) .c-item { padding-left: 0; }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 1.5rem 1rem 4rem; }
+
+  .c-hero { margin: 1.8rem 0 0; }
+  .c-say { font-size: clamp(1.6rem, 8vw, 2.4rem); margin-top: 1rem; }
+  .c-chips { display: none; }
+
+  .market { margin-top: 2.5rem; }
+  .section-head { margin-bottom: 1.2rem; }
+
+  .stalls { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); }
+
+  .stall {
+    min-height: unset;
+    padding: 1rem 1.1rem;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    transform: none !important;
+  }
+  .stall:hover {
+    transform: none !important;
+    box-shadow: none;
+    background: rgba(26,24,20,0.03);
+  }
+  .stall.taped::before { display: none; }
+
+  .stall-text { flex: 1; min-width: 0; }
+  .stall .status { display: none; }
+  .stall .name { font-size: 1.6rem; margin: 0 0 0.15rem; }
+  .stall .tagline-txt { font-size: 0.78rem; margin: 0; }
+  .stall > p { display: none; }
+  .stall footer {
+    flex-direction: column;
+    align-items: flex-end;
+    border-top: none;
+    padding-top: 0;
+    gap: 0.2rem;
+    flex-shrink: 0;
+  }
+  .stall footer span:first-child { display: none; }
+  .stall footer .arrow { font-size: 1.4rem; }
+
+  .stall.empty { display: none; }
+
+  @media (prefers-color-scheme: dark) {
+    .stall:hover { background: rgba(236,228,208,0.04); }
+  }
 }
 
 /* ============ MANIFIESTO — clases específicas de la página ============ */
